@@ -57,7 +57,6 @@ This will take ask your a series of questions, and will generate a `package.json
 
 
 ## Step 2. Install Dependencies
-Installing the below dependencies will create a `node_modules` directory, `yarn.lock` file, and a `package.json` file that includes all of the dependencies.
 
 ### [Webpack](https://webpack.js.org/)
 We we are going to use webpack to manage our code. First, install webpack, webpack-dev-server via the following command.
@@ -89,6 +88,29 @@ We will use Jest as our test runner. Install it via:
 yarn add jest ts-jest react-addons-test-utils --dev
 ```
 
+After installing all of the above dependencies, you sould have a `node_modules` directory, `yarn.lock` file, and a `package.json` file that includes all of the dependencies. The other parts of the `package.json` file should look like this:
+
+```
+{
+  "name": "Your Project Name",
+  "version": "1.0.0",
+  "description": "Your Description",
+  "main": "index.js",
+  "author": "Your Name",
+  "license": "Your License",
+  "scripts": {
+    "start": "webpack-dev-server --content-base dist/",
+    "test": "jest"
+  },
+  "dependencies": {
+   ...
+  },
+  "devDependencies": {
+    ...
+  }
+}
+
+```
 
 ## Step 3. Add Configuration Files
 The next step is to add configuration files for Webpack, TypeScript, and Jest.
@@ -142,4 +164,19 @@ Create a TypeScript configuration file called `tsconfig.json` with the following
 You can reference the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to understand the different `compilerOptions` and what they do. The above configuration should be enough to get you off the ground.
 
 ### Jest Configuration
+Add the following to your `package.json` file, per the [`ts-jest` instructions](https://github.com/kulshekhar/ts-jest).
+
+```
+"jest": {
+  "transform": {
+    ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+  },
+  "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js"
+  ]
+},
+```
 
