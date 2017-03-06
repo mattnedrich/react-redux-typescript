@@ -11,6 +11,7 @@ Inspiration and instruction for this project was taken from the following blog p
 - [https://www.typescriptlang.org/docs/handbook/react-&-webpack.html](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
   - Some parts out of date: [https://github.com/Microsoft/TypeScript/issues/13873](https://github.com/Microsoft/TypeScript/issues/13873)
 - [https://webpack.github.io/docs/webpack-dev-server.html](https://webpack.github.io/docs/webpack-dev-server.html)
+- [https://github.com/facebook/jest/tree/master/examples/typescript](https://github.com/facebook/jest/tree/master/examples/typescript)
 
 ## File Structure
 This project uses the following file structure
@@ -18,22 +19,29 @@ This project uses the following file structure
 ```
 .
 |-- index.html
-|-- client
+|-- client/
     |-- index.js
     |-- components
-|-- dist
+|-- dist/
     |-- bundle.js
+|-- webpack.config.js
+|-- tsconfig.json
 |-- package.json
-|-- node_modules
+|-- node_modules/
 ```
 
 where the above directories and files correspond to the following:
 
-- `index.html` - html page served up to the client
-- `client/` - javascript source code
-- `client/index.js` - entry point for the javascript code
-- `dist/` - output folder for the compiled javascript code
-- `dist/bundle.js` - transpiled javascript application
+- `index.html` - Html page served up to the client
+- `client/` - Source code
+- `client/index.js` - Entry point for the javascript code
+- `client/components/` - Custom react components
+- `dist/` - Output directory for transpiled code
+- `dist/bundle.js` - Transpiled application
+- `webpack.config.js` - Webpack configuration file
+- `tsconfig.json` - TypeScript configuration file
+- `package.json` - Project configuration file
+- `node_modules/` - Where dependencies are installed to
 
 ## Step 1 - Set up [yarn](https://yarnpkg.com/en/) (or [npm](https://www.npmjs.com/))
 You can choose to manage dependencies using either yarn or npm. As of early 2017 it's not clear if yarn will become the defacto standard, but it seems to be gaining popularity. These instructions will use `yarn`, but you can also use `npm` with minimal tweaks to the following instructions.
@@ -49,6 +57,7 @@ This will take ask your a series of questions, and will generate a `package.json
 
 
 ## Step 2. Install Dependencies
+Installing the below dependencies will create a `node_modules` directory, `yarn.lock` file, and a `package.json` file that includes all of the dependencies.
 
 ### [Webpack](https://webpack.js.org/)
 We we are going to use webpack to manage our code. First, install webpack, webpack-dev-server via the following command.
@@ -65,7 +74,7 @@ yarn add react react-dom @types/react @types/react-dom
 ```
 
 ### [TypeScript](https://www.typescriptlang.org/)
-Lastly, we need to install TypeScript
+We need to install TypeScript
 
 ```
 yarn add typescript awesome-typescript-loader --dev
@@ -73,10 +82,16 @@ yarn add typescript awesome-typescript-loader --dev
 
 We specified `awesome-typescript-loader` which we will use as our TypeScript loader. The [TypeScript docs](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html) seem to recommend using `awesome-typescript-loader`, but also also mention [`ts-loader`](https://github.com/TypeStrong/ts-loader) as an alternative. I have not used it, but it may be worth investigating.
 
-Installing the above dependencies will create a `node_modules` directory, `yarn.lock` file, and a `package.json` file that includes all of the dependencies we have installed thus far.
+### [Jest](https://facebook.github.io/jest/docs/tutorial-react.html)
+We will use Jest as our test runner. Install it via:
+
+```
+yarn add jest ts-jest react-addons-test-utils --dev
+```
+
 
 ## Step 3. Add Configuration Files
-The next step is to add configuration files for Webpack and TypeScript.
+The next step is to add configuration files for Webpack, TypeScript, and Jest.
 
 ### Webpack Configuration
 Create a `webpack.config.js` file, and update it to look something like this.
@@ -126,4 +141,5 @@ Create a TypeScript configuration file called `tsconfig.json` with the following
 
 You can reference the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to understand the different `compilerOptions` and what they do. The above configuration should be enough to get you off the ground.
 
-## 
+### Jest Configuration
+
