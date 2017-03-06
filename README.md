@@ -88,6 +88,7 @@ We will use Jest as our test runner. Install it via:
 yarn add jest ts-jest react-addons-test-utils --dev
 ```
 
+### Summary
 After installing all of the above dependencies, you sould have a `node_modules` directory, `yarn.lock` file, and a `package.json` file that includes all of the dependencies. The other parts of the `package.json` file should look like this:
 
 ```
@@ -95,15 +96,14 @@ After installing all of the above dependencies, you sould have a `node_modules` 
   "name": "Your Project Name",
   "version": "1.0.0",
   "description": "Your Description",
-  "main": "index.js",
+  "main": "index.tsx",
   "author": "Your Name",
   "license": "Your License",
   "scripts": {
-    "start": "webpack-dev-server --content-base dist/",
-    "test": "jest"
+    ...
   },
   "dependencies": {
-   ...
+    ...
   },
   "devDependencies": {
     ...
