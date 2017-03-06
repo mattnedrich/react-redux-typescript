@@ -7,12 +7,9 @@ This project was created to demonstrate how to set up a **React** project using
 ## Inspiration
 Inspiration and instruction for this project was taken from the following blog posts and documention.
 
-#### Blog Posts and Documentation
 - [https://scotch.io/tutorials/setup-a-react-environment-using-webpack-and-babel](https://scotch.io/tutorials/setup-a-react-environment-using-webpack-and-babel)
 - [https://www.typescriptlang.org/docs/handbook/react-&-webpack.html](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)
   - Some parts out of date: [https://github.com/Microsoft/TypeScript/issues/13873](https://github.com/Microsoft/TypeScript/issues/13873)
-
-#### Documentation
 - [https://webpack.github.io/docs/webpack-dev-server.html](https://webpack.github.io/docs/webpack-dev-server.html)
 
 ## File Structure
