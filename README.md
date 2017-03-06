@@ -35,7 +35,7 @@ where the above directories and files correspond to the following:
 - `dist/` - output folder for the compiled javascript code
 - `dist/bundle.js` - transpiled javascript application
 
-## Step 1 - set up [yarn](https://yarnpkg.com/en/) or [npm](https://www.npmjs.com/)
+## Step 1 - Set up [yarn](https://yarnpkg.com/en/) (or [npm](https://www.npmjs.com/))
 You can choose to manage dependencies using either yarn or npm. As of early 2017 it's not clear if yarn will become the defacto standard, but it seems to be gaining popularity. These instructions will use `yarn`, but you can also use `npm` with minimal tweaks to the following instructions.
 
 You can find instructions for installing yarn [here](https://yarnpkg.com/lang/en/docs/install/)
@@ -50,21 +50,21 @@ This will take ask your a series of questions, and will generate a `package.json
 
 ## Step 2. Install Dependencies
 
-#### Webpack(https://webpack.js.org/)
+### [Webpack](https://webpack.js.org/)
 We we are going to use webpack to manage our code. First, install webpack, webpack-dev-server via the following command.
 
 ```
 yarn add webpack webpack-dev-server
 ```
 
-#### React
+### [React](https://facebook.github.io/react/)
 We want to install React for use with TypeScript. To do this run
 
 ```
 yarn add react react-dom @types/react @types/react-dom
 ```
 
-#### TypeScript
+### [TypeScript](https://www.typescriptlang.org/)
 Lastly, we need to install TypeScript
 
 ```
@@ -78,7 +78,7 @@ Installing the above dependencies will create a `node_modules` directory, `yarn.
 ## Step 3. Add Configuration Files
 The next step is to add configuration files for Webpack and TypeScript.
 
-#### Webpack Configuration
+### Webpack Configuration
 Create a `webpack.config.js` file, and update it to look something like this.
 
 ```
@@ -105,7 +105,7 @@ module.exports = {
 
 The `webpack.config.js` file defines the entry point for our javascript code to live in `./client/index.js`, and specifies that the compiled javascript be placed in `./dist/bundle.js`.
 
-#### TypeScript Configuration
+### TypeScript Configuration
 Create a TypeScript configuration file called `tsconfig.json` with the following contents:
 
 ```
