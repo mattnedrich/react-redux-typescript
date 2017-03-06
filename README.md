@@ -1,5 +1,4 @@
-# react-project-template
-The following instructions demonstrate how to set up a **React** project using
+This project was created to demonstrate how to set up a **React** project using
 
 - **TypeScript**
 - **Redux**
@@ -59,15 +58,10 @@ We we are going to use webpack to manage our code. First, install webpack, webpa
 
 ```
 yarn add webpack webpack-dev-server
-
-yarn add react react-dom @types/react @types/react-dom
-
-yarn add typescript awesome-typescript-loader source-map-loader --dev
 ```
 
 #### React
 We want to install React for use with TypeScript. To do this run
-
 
 ```
 yarn add react react-dom @types/react @types/react-dom
@@ -82,10 +76,10 @@ yarn add typescript awesome-typescript-loader --dev
 
 We specified `awesome-typescript-loader` which we will use as our TypeScript loader. The [TypeScript docs](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html) seem to recommend using `awesome-typescript-loader`, but also also mention [`ts-loader`](https://github.com/TypeStrong/ts-loader) as an alternative. I have not used it, but it may be worth investigating.
 
-Installing the above dependencies will create a `node_modules` directory, `yarn.lock` file, and a `package.json` file including all of the dependencies we have installed thus far.
+Installing the above dependencies will create a `node_modules` directory, `yarn.lock` file, and a `package.json` file that includes all of the dependencies we have installed thus far.
 
-## Step 2. Configuration Files
-We need to add configuration files for webpack and TypeScript.
+## Step 3. Add Configuration Files
+The next step is to add configuration files for Webpack and TypeScript.
 
 #### Webpack Configuration
 Create a `webpack.config.js` file, and update it to look something like this.
