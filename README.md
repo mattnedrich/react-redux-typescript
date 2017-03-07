@@ -179,4 +179,7 @@ Add the following to your `package.json` file, per the [`ts-jest` instructions](
   ]
 },
 ```
-
+## TODO
+- Redux
+- Yarn scripts
+- Linting
