@@ -1,8 +1,10 @@
-This project was created to demonstrate how to set up a **React** project using
+This project was created to demonstrate how to set up a project using the following technologies:
 
-- **TypeScript**
+- **React**
 - **Redux**
-- **Jest**
+- **TypeScript**
+
+It also demonstrates how to set up **Jest** for unit testing.
 
 ## Inspiration
 Inspiration and instruction for this project was taken from the following blog posts and documention.
@@ -20,7 +22,7 @@ This project uses the following file structure
 .
 |-- index.html
 |-- client/
-    |-- index.js
+    |-- index.tsx
     |-- components
 |-- dist/
     |-- bundle.js
@@ -34,7 +36,7 @@ where the above directories and files correspond to the following:
 
 - `index.html` - Html page served up to the client
 - `client/` - Source code
-- `client/index.js` - Entry point for the javascript code
+- `client/index.tsx` - Entry point for the javascript code
 - `client/components/` - Custom react components
 - `dist/` - Output directory for transpiled code
 - `dist/bundle.js` - Transpiled application
@@ -57,23 +59,31 @@ This will take ask your a series of questions, and will generate a `package.json
 
 
 ## Step 2. Install Dependencies
+This sections describes how to install all of the required project dependencies using yarn.
 
 ### [Webpack](https://webpack.js.org/)
-We we are going to use webpack to manage our code. First, install webpack, webpack-dev-server via the following command.
+We will use webpack to manage the compilation of our TypeScript code. Install webpack, and webpack-dev-server by running:
 
 ```
 yarn add webpack webpack-dev-server
 ```
 
 ### [React](https://facebook.github.io/react/)
-We want to install React for use with TypeScript. To do this run
+Install React with type definitions by running:
 
 ```
 yarn add react react-dom @types/react @types/react-dom
 ```
 
+### [React](https://facebook.github.io/react/)
+Install Redux for usage with react with type definitions by running:
+
+```
+yarn add redux react-redux @types/redux @types/react-redux
+```
+
 ### [TypeScript](https://www.typescriptlang.org/)
-We need to install TypeScript
+Install TypeScript by running:
 
 ```
 yarn add typescript awesome-typescript-loader --dev
@@ -82,14 +92,14 @@ yarn add typescript awesome-typescript-loader --dev
 We specified `awesome-typescript-loader` which we will use as our TypeScript loader. The [TypeScript docs](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html) seem to recommend using `awesome-typescript-loader`, but also also mention [`ts-loader`](https://github.com/TypeStrong/ts-loader) as an alternative. I have not used it, but it may be worth investigating.
 
 ### [Jest](https://facebook.github.io/jest/docs/tutorial-react.html)
-We will use Jest as our test runner. Install it via:
+We will use Jest as our test runner. Install it and some supporting libraries by running:
 
 ```
 yarn add jest ts-jest react-addons-test-utils --dev
 ```
 
 ### Summary
-After installing all of the above dependencies, you sould have a `node_modules` directory, `yarn.lock` file, and a `package.json` file that includes all of the dependencies. The other parts of the `package.json` file should look like this:
+After installing all of the above dependencies, you sould have a `node_modules` directory, `yarn.lock` file, and a `package.json` file that includes all of the dependencies. The  `package.json` file should look like this:
 
 ```
 {
@@ -111,6 +121,8 @@ After installing all of the above dependencies, you sould have a `node_modules` 
 }
 
 ```
+
+The `dependencies` and `devDependencies` sections should be filled in by the libraries we just installed.
 
 ## Step 3. Add Configuration Files
 The next step is to add configuration files for Webpack, TypeScript, and Jest.
@@ -140,7 +152,7 @@ module.exports = {
 }
 ```
 
-The `webpack.config.js` file defines the entry point for our javascript code to live in `./client/index.js`, and specifies that the compiled javascript be placed in `./dist/bundle.js`.
+The `webpack.config.js` file defines the entry point for our javascript code to live in `./client/index.tsx`, and specifies that the compiled javascript be placed in `./dist/bundle.js`. The `loaders` section describes how to process different file types. We are informing webpack to use the `awesome-typescript-loader` when processing `.ts` and `.tsx` files.
 
 ### TypeScript Configuration
 Create a TypeScript configuration file called `tsconfig.json` with the following contents:
@@ -161,7 +173,7 @@ Create a TypeScript configuration file called `tsconfig.json` with the following
 }
 ```
 
-You can reference the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to understand the different `compilerOptions` and what they do. The above configuration should be enough to get you off the ground.
+You can reference the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to understand the different `compilerOptions` and what they do. The above configuration should be enough to get us off the ground.
 
 ### Jest Configuration
 Add the following to your `package.json` file, per the [`ts-jest` instructions](https://github.com/kulshekhar/ts-jest).
@@ -179,6 +191,38 @@ Add the following to your `package.json` file, per the [`ts-jest` instructions](
   ]
 },
 ```
+## Step 4. Add Some HTML Boilerplate
+We need to define the base HTML file that our application will live in. I recommend using something simple like the following:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sample React-Redux-TypeScript Project</title>
+  </head>
+  <body>
+    <div id="app"> </div>
+    <script src="./dist/bundle.js"> </script>
+  </body>
+</html>
+```
+
+Place the above HTML in an `index.html` file in the root of the project. This file includes a `div` where we will load our application, and the compiled `bundle.js` javascript file.
+
+We can add the following script to our `package.json` file to allow us to start a `webpack-dev-server` pointing at the above HTML file. To do this, add the following to the `scripts` section the `package.json` file.
+
+```javascript
+"scripts": {
+  "start": "webpack-dev-server --content-base ./"
+}
+```
+
+## Step 5. Set Up Some Project Boilerplate
+
+### Try It Out
+The above configuration should allow us to 
+
 ## TODO
 - Redux
 - Yarn scripts
