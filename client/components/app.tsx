@@ -6,7 +6,7 @@ import {updateGreeting} from '../actions/index';
 
 interface AppProps {greeting: string, store: any, updateGreeting: any};
 
-class App extends React.Component<AppProps, undefined> {
+class App extends React.Component<AppProps, any> {
 
   refs: {
     greetingInputRef: HTMLInputElement;

@@ -6,7 +6,7 @@
   "author": "Matt Nedrich",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --content-base dist/",
+    "start": "webpack-dev-server --content-base ./",
     "test": "jest"
   },
   "jest": {
