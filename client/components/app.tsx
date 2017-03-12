@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import IncrementExample from './increment-example'
 import ApplicationState from '../application-state';
-import {updateGreeting} from '../actions/index';
+import * as ActionCreators from '../action-creators/index';
 
 interface AppProps {greeting: string, store: any, updateGreeting: any};
 
@@ -39,7 +39,7 @@ const mapStateToProps = (state: ApplicationState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    updateGreeting: (newGreeting: string) => dispatch(updateGreeting(newGreeting))
+    updateGreeting: (newGreeting: string) => dispatch(ActionCreators.updateGreeting(newGreeting))
   };
 }
 

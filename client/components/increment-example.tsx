@@ -1,8 +1,8 @@
-import * as React from "react";
+import * as React from 'react';
 import { connect } from 'react-redux';
 
 import ApplicationState from '../application-state';
-import { increment } from '../actions/index';
+import * as ActionCreators from '../action-creators/index';
 
 interface IncrementProps { count: number, increment: any };
 
@@ -32,7 +32,7 @@ const mapStateToProps = (state: ApplicationState) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    increment: () => dispatch(increment())
+    increment: () => dispatch(ActionCreators.increment())
   };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(IncrementExample);
