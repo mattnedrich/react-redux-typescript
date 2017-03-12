@@ -1,22 +1,22 @@
 import ApplicationState from '../application-state';
-import {UPDATE_GREETING, UpdateGreetingAction } from '../actions/index';
-import {INCREMENT, IncrementAction} from '../actions/index';
+import * as ActionTypes from '../action-types/index';
+import * as Actions from '../actions/index';
 
 const defaultState = {
   greeting: "React-TypeScript-Redux Example",
   count: 0
 }
 
-type Action = UpdateGreetingAction | IncrementAction;
+type Action = Actions.UpdateGreetingAction | Actions.IncrementAction;
 
 const updateState = (state: ApplicationState, action: Action) => {
   switch(action.type) {
-  case UPDATE_GREETING:
+  case ActionTypes.UPDATE_GREETING:
     return {
       greeting: action.payload,
       count: state.count
     }
-  case INCREMENT:
+  case ActionTypes.INCREMENT:
     return {
       greeting: state.greeting,
       count: state.count + 1
