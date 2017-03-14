@@ -1,3 +1,4 @@
+# Setup
 This project was created to demonstrate how to set up a project using the following technologies:
 
 - **React**
@@ -221,7 +222,7 @@ We can add the following script to our `package.json` file to allow us to start 
 # The Example App
 This example app, like every other React/Redux example app contains a greeting message the that user can change, and a button that increments a counter:
 
-![image](https://cloud.githubusercontent.com/assets/4796480/23883359/d7c43d12-083c-11e7-8f51-82ce56624603.png)
+<img src="https://cloud.githubusercontent.com/assets/4796480/23883359/d7c43d12-083c-11e7-8f51-82ce56624603.png" width="500px" />
 
 The application state is modeled in the following class:
 
@@ -258,8 +259,36 @@ class App extends React.Component<any, any> {
 ## TypeScript and React/Redux
 Thus far, I'm enjoying working with TypeScript. It feels like working in Java or C#, but with Javascript. You can choose to incorporate TypeScript as much as you'd like. You can just write vanilla JavaScript, however, once you declare a type for a variable, it can cause type requirements to ripple into other parts of your code. This seems to be especially evident if you install the type bindings for React and Redux.
 
-One area that types can be handy in React/Redux applications is in your reducers. I came across [this article](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/) and wanted to try out a more strongly typed approach for writing reducers.
+The `Greeting` component runs into this on the React side of things. the `Greeting` component HTML looks like this:
 
+```jsx
+  <div>
+    <h1> {this.props.greeting} </h1>
+    <input ref="greetingInputRef" type="text"></input>
+    <button onClick={this.updateGreetingAction}>Update Greeting</button>
+  </div>
+```
+
+When the button is clicked, it calls `updateGreetingAction` which needs to go fetch the text out out the `input` element and dispatch an action to update our application state. The `updateGreetingAction` function looks like this:
+
+```javascript
+  updateGreetingAction() {
+    this.props.updateGreeting(this.refs.greetingInputRef.value);
+  }
+```
+
+Here, we just dispatch an action passing the `value` of the `input` element. When I first wrote this, the TypeScript compiler didn't know what `greetingInputRef` was, so it couldn't be sure that it had a `value` property. To work around this, I added some explicit type declaration via:
+
+```javascript
+  refs: {
+    greetingInputRef: HTMLInputElement;
+  }
+```
+
+You will run into these types of situations from time to time. It kind of makes you appreciate the weakly typed nature of JavaScript. It also makes you realize how fragile it is.
+
+### Reducers with TypeScript
+One area in particular that types can be handy in React/Redux applications is inside of Redux reducers. I came across [this article](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/) and wanted to try out a more strongly typed approach for writing reducers.
 
 
 ## Comments on Testing
