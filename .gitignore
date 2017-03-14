@@ -58,5 +58,4 @@ typings/
 .env
 
 # generated javascript
-./dist/bundle.js
-./dist/bundle.js.map
+./dist/
