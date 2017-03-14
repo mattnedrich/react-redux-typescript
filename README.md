@@ -218,13 +218,50 @@ We can add the following script to our `package.json` file to allow us to start 
   "start": "webpack-dev-server --content-base ./"
 }
 ```
+# The Example App
+This example app, like every other React/Redux example app contains a greeting message the that user can change, and a button that increments a counter:
 
-## Step 5. Set Up Some Project Boilerplate
+![image](https://cloud.githubusercontent.com/assets/4796480/23883359/d7c43d12-083c-11e7-8f51-82ce56624603.png)
 
-### Try It Out
-The above configuration should allow us to 
+The application state is modeled in the following class:
 
-## TODO
-- Redux
-- Yarn scripts
-- Linting
+```javascript
+class ApplicationState {
+  greeting: string
+  count: number;
+
+  constructor(greeting: string = 'React-TypeScript-Redux Example', count: number = 0) {
+    this.greeting = greeting;
+    this.count = count;
+  }
+}
+
+export default ApplicationState;
+```
+Notice how we can now define our state using types!
+
+There are two main components - `Greeting` and `Increment`. Both are included in a wrapper component called `App`:
+
+```javascript
+class App extends React.Component<any, any> {
+  render() {
+    return (
+      <div style={{textAlign: 'center'}}>
+        <Greeting />
+        <Increment />
+      </div>
+    );
+  }
+}
+```
+
+## TypeScript and React/Redux
+Thus far, I'm enjoying working with TypeScript. It feels like working in Java or C#, but with Javascript. You can choose to incorporate TypeScript as much as you'd like. You can just write vanilla JavaScript, however, once you declare a type for a variable, it can cause type requirements to ripple into other parts of your code. This seems to be especially evident if you install the type bindings for React and Redux.
+
+One area that types can be handy in React/Redux applications is in your reducers. I came across [this article](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/) and wanted to try out a more strongly typed approach for writing reducers.
+
+
+
+## Comments on Testing
+Jest vs. other options
+
