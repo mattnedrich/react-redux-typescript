@@ -2,11 +2,6 @@ import ApplicationState from '../application-state';
 import * as ActionTypes from '../action-types/index';
 import * as Actions from '../actions/index';
 
-const defaultState = {
-  greeting: "React-TypeScript-Redux Example",
-  count: 0
-}
-
 type Action = Actions.UpdateGreetingAction | Actions.IncrementAction;
 
 const updateState = (state: ApplicationState, action: Action) => {
@@ -22,7 +17,7 @@ const updateState = (state: ApplicationState, action: Action) => {
       count: state.count + 1
     }
   default:
-    return defaultState;
+    return ApplicationState.getDefault();
   }
 };
 
