@@ -1,14 +1,10 @@
 class ApplicationState {
-  static getDefault() {
-    return new ApplicationState();
-  }
-
   greeting: string
   count: number;
 
-  constructor() {
-    this.greeting = 'React-TypeScript-Redux Example';
-    this.count = 0;
+  constructor(greeting: string = 'React-TypeScript-Redux Example', count: number = 0) {
+    this.greeting = greeting;
+    this.count = count;
   }
 }
 

@@ -4,7 +4,7 @@ import * as Actions from '../actions/index';
 export const updateGreeting: (greeting: string) => Actions.UpdateGreetingAction = (greeting) => {
   return {
     type: ActionTypes.UPDATE_GREETING,
-    payload: greeting
+    greeting: greeting
   };
 }
 

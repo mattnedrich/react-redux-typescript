@@ -8,7 +8,7 @@ const updateState = (state: ApplicationState, action: Action) => {
   switch(action.type) {
   case ActionTypes.UPDATE_GREETING:
     return {
-      greeting: action.payload,
+      greeting: action.greeting,
       count: state.count
     }
   case ActionTypes.INCREMENT:
@@ -17,7 +17,7 @@ const updateState = (state: ApplicationState, action: Action) => {
       count: state.count + 1
     }
   default:
-    return ApplicationState.getDefault();
+    return new ApplicationState();
   }
 };
 

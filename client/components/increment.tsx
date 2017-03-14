@@ -6,7 +6,7 @@ import * as ActionCreators from '../action-creators/index';
 
 interface IncrementProps { count: number, increment: any };
 
-class IncrementExample extends React.Component<any, any> {
+class Increment extends React.Component<any, any> {
   constructor() {
     super();
     this.buttonClicked = this.buttonClicked.bind(this);
@@ -35,4 +35,4 @@ const mapDispatchToProps = (dispatch: any) => {
     increment: () => dispatch(ActionCreators.increment())
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(IncrementExample);
+export default connect(mapStateToProps, mapDispatchToProps)(Increment);
