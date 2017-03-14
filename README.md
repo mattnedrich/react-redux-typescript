@@ -14,6 +14,7 @@ Inspiration and instruction for this project was taken from the following blog p
   - Some parts out of date: [https://github.com/Microsoft/TypeScript/issues/13873](https://github.com/Microsoft/TypeScript/issues/13873)
 - [https://webpack.github.io/docs/webpack-dev-server.html](https://webpack.github.io/docs/webpack-dev-server.html)
 - [https://github.com/facebook/jest/tree/master/examples/typescript](https://github.com/facebook/jest/tree/master/examples/typescript)
+- [https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/)
 
 ## File Structure
 This project uses the following file structure
@@ -101,7 +102,7 @@ yarn add jest ts-jest react-addons-test-utils --dev
 ### Summary
 After installing all of the above dependencies, you sould have a `node_modules` directory, `yarn.lock` file, and a `package.json` file that includes all of the dependencies. The  `package.json` file should look like this:
 
-```
+```json
 {
   "name": "Your Project Name",
   "version": "1.0.0",
@@ -130,7 +131,7 @@ The next step is to add configuration files for Webpack, TypeScript, and Jest.
 ### Webpack Configuration
 Create a `webpack.config.js` file, and update it to look something like this.
 
-```
+```javascript
 const path = require('path');
 module.exports = {
   entry: './client/index.tsx',
@@ -157,7 +158,7 @@ The `webpack.config.js` file defines the entry point for our javascript code to 
 ### TypeScript Configuration
 Create a TypeScript configuration file called `tsconfig.json` with the following contents:
 
-```
+```json
 {
   "compilerOptions": {
     "outDir": "./dist/",
@@ -178,7 +179,7 @@ You can reference the [TypeScript docs](https://www.typescriptlang.org/docs/hand
 ### Jest Configuration
 Add the following to your `package.json` file, per the [`ts-jest` instructions](https://github.com/kulshekhar/ts-jest).
 
-```
+```json
 "jest": {
   "transform": {
     ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
@@ -212,7 +213,7 @@ Place the above HTML in an `index.html` file in the root of the project. This fi
 
 We can add the following script to our `package.json` file to allow us to start a `webpack-dev-server` pointing at the above HTML file. To do this, add the following to the `scripts` section the `package.json` file.
 
-```javascript
+```json
 "scripts": {
   "start": "webpack-dev-server --content-base ./"
 }
