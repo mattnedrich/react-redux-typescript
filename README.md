@@ -330,7 +330,7 @@ const updateState = (state: ApplicationState, action: Action) => {
 };
 ```
 
-If we were to update the `ActionType.INCREMENT` case to update the `greeting: state.greeting` line to be `greeting: action.greeting` instead, we would receive a compiler error stating that:
+If we were to update the `ActionTypes.INCREMENT` case to set `greeting` to `action.greeting` instead of  `state.greeting`, we would receive a compiler error stating that:
 
 ```
 ERROR in [at-loader] client/reducers/index.ts:16:24
