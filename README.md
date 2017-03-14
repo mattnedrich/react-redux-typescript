@@ -290,6 +290,52 @@ You will run into these types of situations from time to time. It kind of makes 
 ### Reducers with TypeScript
 One area in particular that types can be handy in React/Redux applications is inside of Redux reducers. I came across [this article](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/) and wanted to try out a more strongly typed approach for writing reducers.
 
+Using TypeScript we can define our actions in a type safe manner. The actions for the sample application are defined below, using  TypeScript `type` aliases:
+
+```typescript
+export type UpdateGreetingAction = {
+  type: ActionTypes.UPDATE_GREETING,
+  greeting: string
+}
+
+export type IncrementAction = {
+  type: ActionTypes.INCREMENT
+}
+```
+
+We can then create a union type in our reducer, combining all of our individual action types:
+
+```typescript
+type Action = Actions.UpdateGreetingAction | Actions.IncrementAction;
+```
+
+Then, when we switch on the action type, we are guarenteed type safety when updating our state:
+
+```typescript
+const updateState = (state: ApplicationState, action: Action) => {
+  switch(action.type) {
+  case ActionTypes.UPDATE_GREETING:
+    return {
+      greeting: action.greeting,
+      count: state.count
+    }
+  case ActionTypes.INCREMENT:
+    return {
+      greeting: state.greeting,
+      count: state.count + 1
+    }
+  default:
+    return new ApplicationState();
+  }
+};
+```
+
+If we were to update the `ActionType.INCREMENT` case to update the `greeting: state.greeting` line to be `greeting: action.greeting` instead, we would receive a compiler error stating that:
+
+```
+ERROR in [at-loader] client/reducers/index.ts:16:24
+    TS2339: Property 'greeting' does not exist on type 'IncrementAction'.
+```
 
 ## Comments on Testing
 Jest vs. other options
