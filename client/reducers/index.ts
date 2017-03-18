@@ -4,7 +4,9 @@ import * as Actions from '../actions/index';
 
 type Action = Actions.UpdateGreetingAction | Actions.IncrementAction;
 
-const updateState = (state: ApplicationState, action: Action) => {
+const defaultState = new ApplicationState();
+
+const updateState = (state: ApplicationState = defaultState, action: Action) => {
   switch(action.type) {
   case ActionTypes.UPDATE_GREETING:
     return {
@@ -17,7 +19,7 @@ const updateState = (state: ApplicationState, action: Action) => {
       count: state.count + 1
     }
   default:
-    return new ApplicationState();
+    return state;
   }
 };
 
