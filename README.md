@@ -312,7 +312,8 @@ type Action = Actions.UpdateGreetingAction | Actions.IncrementAction;
 Then, when we switch on the action type, we are guarenteed type safety when updating our state:
 
 ```typescript
-const updateState = (state: ApplicationState, action: Action) => {
+const defaultState = new ApplicationState();
+const updateState = (state: ApplicationState = defaultState, action: Action) => {
   switch(action.type) {
   case ActionTypes.UPDATE_GREETING:
     return {
@@ -325,7 +326,7 @@ const updateState = (state: ApplicationState, action: Action) => {
       count: state.count + 1
     }
   default:
-    return new ApplicationState();
+    return state;
   }
 };
 ```
@@ -337,6 +338,22 @@ ERROR in [at-loader] client/reducers/index.ts:16:24
     TS2339: Property 'greeting' does not exist on type 'IncrementAction'.
 ```
 
-## Comments on Testing
-Jest vs. other options
+## Project Scripts
+To build the TypeScript code and produce an output `bundle.js` file run
+
+```
+webpack
+```
+
+To start `webpack-dev-server` running run
+
+```
+yarn start
+```
+
+To run the `jest` tests run
+
+```
+yarn test
+```
 
