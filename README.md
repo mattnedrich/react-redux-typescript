@@ -1,3 +1,4 @@
+# Setup
 This project was created to demonstrate how to set up a project using the following technologies:
 
 - **React**
@@ -218,13 +219,141 @@ We can add the following script to our `package.json` file to allow us to start 
   "start": "webpack-dev-server --content-base ./"
 }
 ```
+# The Example App
+This example app, like every other React/Redux example app contains a greeting message the that user can change, and a button that increments a counter:
 
-## Step 5. Set Up Some Project Boilerplate
+<img src="https://cloud.githubusercontent.com/assets/4796480/23883359/d7c43d12-083c-11e7-8f51-82ce56624603.png" width="500px" />
 
-### Try It Out
-The above configuration should allow us to 
+The application state is modeled in the following class:
 
-## TODO
-- Redux
-- Yarn scripts
-- Linting
+```javascript
+class ApplicationState {
+  greeting: string
+  count: number;
+
+  constructor(greeting: string = 'React-TypeScript-Redux Example', count: number = 0) {
+    this.greeting = greeting;
+    this.count = count;
+  }
+}
+
+export default ApplicationState;
+```
+Notice how we can now define our state using types!
+
+There are two main components - `Greeting` and `Increment`. Both are included in a wrapper component called `App`:
+
+```javascript
+class App extends React.Component<any, any> {
+  render() {
+    return (
+      <div style={{textAlign: 'center'}}>
+        <Greeting />
+        <Increment />
+      </div>
+    );
+  }
+}
+```
+
+## TypeScript and React/Redux
+Thus far, I'm enjoying working with TypeScript. It feels like working in Java or C#, but with Javascript. You can choose to incorporate TypeScript as much as you'd like. You can just write vanilla JavaScript, however, once you declare a type for a variable, it can cause type requirements to ripple into other parts of your code. This seems to be especially evident if you install the type bindings for React and Redux.
+
+The `Greeting` component runs into this on the React side of things. the `Greeting` component HTML looks like this:
+
+```jsx
+  <div>
+    <h1> {this.props.greeting} </h1>
+    <input ref="greetingInputRef" type="text"></input>
+    <button onClick={this.updateGreetingAction}>Update Greeting</button>
+  </div>
+```
+
+When the button is clicked, it calls `updateGreetingAction` which needs to go fetch the text out out the `input` element and dispatch an action to update our application state. The `updateGreetingAction` function looks like this:
+
+```javascript
+  updateGreetingAction() {
+    this.props.updateGreeting(this.refs.greetingInputRef.value);
+  }
+```
+
+Here, we just dispatch an action passing the `value` of the `input` element. When I first wrote this, the TypeScript compiler didn't know what `greetingInputRef` was, so it couldn't be sure that it had a `value` property. To work around this, I added some explicit type declaration via:
+
+```javascript
+  refs: {
+    greetingInputRef: HTMLInputElement;
+  }
+```
+
+You will run into these types of situations from time to time. It kind of makes you appreciate the weakly typed nature of JavaScript. It also makes you realize how fragile it is.
+
+### Reducers with TypeScript
+One area in particular that types can be handy in React/Redux applications is inside of Redux reducers. I came across [this article](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/) and wanted to try out a more strongly typed approach for writing reducers.
+
+Using TypeScript we can define our actions in a type safe manner. The actions for the sample application are defined below, using  TypeScript `type` aliases:
+
+```typescript
+export type UpdateGreetingAction = {
+  type: ActionTypes.UPDATE_GREETING,
+  greeting: string
+}
+
+export type IncrementAction = {
+  type: ActionTypes.INCREMENT
+}
+```
+
+We can then create a union type in our reducer, combining all of our individual action types:
+
+```typescript
+type Action = Actions.UpdateGreetingAction | Actions.IncrementAction;
+```
+
+Then, when we switch on the action type, we are guarenteed type safety when updating our state:
+
+```typescript
+const defaultState = new ApplicationState();
+const updateState = (state: ApplicationState = defaultState, action: Action) => {
+  switch(action.type) {
+  case ActionTypes.UPDATE_GREETING:
+    return {
+      greeting: action.greeting,
+      count: state.count
+    }
+  case ActionTypes.INCREMENT:
+    return {
+      greeting: state.greeting,
+      count: state.count + 1
+    }
+  default:
+    return state;
+  }
+};
+```
+
+If we were to update the `ActionTypes.INCREMENT` case to set `greeting` to `action.greeting` instead of  `state.greeting`, we would receive a compiler error stating that:
+
+```
+ERROR in [at-loader] client/reducers/index.ts:16:24
+    TS2339: Property 'greeting' does not exist on type 'IncrementAction'.
+```
+
+## Project Scripts
+To build the TypeScript code and produce an output `bundle.js` file run
+
+```
+webpack
+```
+
+To start `webpack-dev-server` running run
+
+```
+yarn start
+```
+
+To run the `jest` tests run
+
+```
+yarn test
+```
+
