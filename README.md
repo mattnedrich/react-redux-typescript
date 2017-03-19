@@ -367,3 +367,15 @@ const store = createStore(
   (window as any).__REDUX_DEVTOOLS_EXTENSION__  && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 );
 ```
+
+If you also need to include other middleware when you create your store (e.g., for something like `redux-thunk` you can use the following:
+
+```typescript
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+
+const enhancer = (window as any).__REDUX_DEVTOOLS_EXTENSION__ ? (window as any).__REDUX_DEVTOOLS_EXTENSION__()(createStore) : createStore;
+const store = enhancer(updateState, applyMiddleware(thunk));
+```
+
+I found this solution in [this issue](https://github.com/zalmoxisus/redux-devtools-extension/issues/134) on the Redux dev tools extension project.
