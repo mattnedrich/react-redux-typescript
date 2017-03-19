@@ -224,20 +224,20 @@ This example app, like every other React/Redux example app contains a greeting m
 
 <img src="https://cloud.githubusercontent.com/assets/4796480/23883359/d7c43d12-083c-11e7-8f51-82ce56624603.png" width="500px" />
 
-The application state is modeled in the following class:
+The application state is modeled in the following way:
 
-```javascript
-class ApplicationState {
+```typescript
+export interface ApplicationState {
   greeting: string
   count: number;
+};
 
-  constructor(greeting: string = 'React-TypeScript-Redux Example', count: number = 0) {
-    this.greeting = greeting;
-    this.count = count;
-  }
-}
+const defaultState: ApplicationState = {
+  greeting: 'React-TypeScript-Redux Example',
+  count: 0
+};
 
-export default ApplicationState;
+export default defaultState;
 ```
 Notice how we can now define our state using types!
 
@@ -312,7 +312,6 @@ type Action = Actions.UpdateGreetingAction | Actions.IncrementAction;
 Then, when we switch on the action type, we are guarenteed type safety when updating our state:
 
 ```typescript
-const defaultState = new ApplicationState();
 const updateState = (state: ApplicationState = defaultState, action: Action) => {
   switch(action.type) {
   case ActionTypes.UPDATE_GREETING:
