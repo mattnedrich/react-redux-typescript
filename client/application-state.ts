@@ -1,11 +1,11 @@
-class ApplicationState {
+export interface ApplicationState {
   greeting: string
   count: number;
+};
 
-  constructor(greeting: string = 'React-TypeScript-Redux Example', count: number = 0) {
-    this.greeting = greeting;
-    this.count = count;
-  }
-}
+const defaultState: ApplicationState = {
+  greeting: 'React-TypeScript-Redux Example',
+  count: 0
+};
 
-export default ApplicationState;
+export default defaultState;

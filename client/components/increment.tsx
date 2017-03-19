@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import ApplicationState from '../application-state';
+import { ApplicationState } from '../application-state';
 import * as ActionCreators from '../action-creators/index';
 
 interface IncrementProps { count: number, increment: any };
