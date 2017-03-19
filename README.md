@@ -356,4 +356,15 @@ To run the `jest` tests run
 ```
 yarn test
 ```
+## Debugging
+The [Redux dev tools extension](https://github.com/zalmoxisus/redux-devtools-extension) is a nice way to visualize the redux state changes in your app, and debug issues that might arise. There are two steps required to install it:
 
+1. **Install the browser extension** - this varies based on your browser, but there are instructions in the above link.
+2. **Update how you instantiate your Redux store** - The second step requires you to insert a debug hook into your code when you instantiate your Redux store. There are several ways to do this depending on your application. The easiest way (explained in the above link) involves adding an extra parameter when you call `createStore`, and looks like this:
+
+```typescript
+const store = createStore(
+  updateState,
+  (window as any).__REDUX_DEVTOOLS_EXTENSION__  && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+);
+```
