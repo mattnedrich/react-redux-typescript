@@ -1,11 +1,11 @@
 export interface ApplicationState {
-  greeting: string
   count: number;
+  greeting: string;
 };
 
 const defaultState: ApplicationState = {
+  count: 0,
   greeting: 'React-TypeScript-Redux Example',
-  count: 0
 };
 
 export default defaultState;

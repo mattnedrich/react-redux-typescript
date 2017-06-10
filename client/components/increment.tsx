@@ -1,10 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { ApplicationState } from '../application-state';
 import * as ActionCreators from '../action-creators/index';
+import { ApplicationState } from '../application-state';
 
-interface IncrementProps { count: number, increment: any };
+interface IncrementProps {
+  count: number;
+  increment: any;
+};
 
 class Increment extends React.Component<any, any> {
   constructor() {
@@ -12,11 +15,11 @@ class Increment extends React.Component<any, any> {
     this.buttonClicked = this.buttonClicked.bind(this);
   }
 
-  buttonClicked() {
+  public buttonClicked() {
     this.props.increment();
   }
 
-  render() {
+  public render() {
     return (
       <div>
         <p>{this.props.count}</p>
@@ -26,13 +29,16 @@ class Increment extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (state: ApplicationState) => {
-  return { count: state.count };
-}
-
-const mapDispatchToProps = (dispatch: any) => {
+function mapStateToProps(state: ApplicationState) {
   return {
-    increment: () => dispatch(ActionCreators.increment())
+    count: state.count,
   };
 }
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    increment: () => dispatch(ActionCreators.increment()),
+  };
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Increment);

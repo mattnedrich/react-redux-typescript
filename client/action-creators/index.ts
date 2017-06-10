@@ -1,15 +1,26 @@
 import * as ActionTypes from '../action-types/index';
-import * as Actions from '../actions/index';
 
-export const updateGreeting: (greeting: string) => Actions.UpdateGreetingAction = (greeting) => {
+export type UpdateGreetingAction = {
+  type: ActionTypes.UPDATE_GREETING,
+  greeting: string,
+};
+
+export type IncrementAction = {
+  type: ActionTypes.INCREMENT,
+};
+
+export type updateGreeting = typeof updateGreeting;
+export type increment = typeof increment;
+
+export function updateGreeting(greeting: string): UpdateGreetingAction {
   return {
     type: ActionTypes.UPDATE_GREETING,
-    greeting: greeting
+    greeting,
   };
-}
+};
 
-export const increment: () => Actions.IncrementAction = () => {
+export function increment(): IncrementAction {
   return {
-    type: ActionTypes.INCREMENT
+    type: ActionTypes.INCREMENT,
   };
-}
+};

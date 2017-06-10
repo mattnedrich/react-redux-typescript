@@ -1,22 +1,26 @@
 import defaultState from '../application-state';
 import { ApplicationState } from '../application-state';
-import * as ActionTypes from '../action-types/index';
-import * as Actions from '../actions/index';
 
-type Action = Actions.UpdateGreetingAction | Actions.IncrementAction;
+import { IncrementAction, UpdateGreetingAction } from '../action-creators/index';
+import * as ActionTypes from '../action-types/index';
+
+type Action = UpdateGreetingAction | IncrementAction;
 
 const updateState = (state: ApplicationState = defaultState, action: Action) => {
-  switch(action.type) {
+  switch (action.type) {
+
   case ActionTypes.UPDATE_GREETING:
     return {
+      ...state,
       greeting: action.greeting,
-      count: state.count
-    }
+    };
+
   case ActionTypes.INCREMENT:
     return {
-      greeting: state.greeting,
-      count: state.count + 1
-    }
+      ...state,
+      count: state.count + 1,
+    };
+
   default:
     return state;
   }
