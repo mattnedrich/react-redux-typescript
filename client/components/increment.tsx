@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import * as ActionCreators from '../action-creators/index';
 import { ApplicationState } from '../application-state';
 
-interface IncrementProps {
+export interface Props {
   count: number;
   increment: any;
 };
 
-class Increment extends React.Component<any, any> {
+export default class Increment extends React.Component<Props, any> {
   constructor() {
     super();
     this.buttonClicked = this.buttonClicked.bind(this);
@@ -29,16 +29,3 @@ class Increment extends React.Component<any, any> {
   }
 }
 
-function mapStateToProps(state: ApplicationState) {
-  return {
-    count: state.count,
-  };
-}
-
-function mapDispatchToProps(dispatch: any) {
-  return {
-    increment: () => dispatch(ActionCreators.increment()),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Increment);
