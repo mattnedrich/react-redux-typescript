@@ -14,7 +14,7 @@ function mapStateToProps(state: ApplicationState): StateProps {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<any>) {
+function mapDispatchToProps(dispatch: Dispatch<any>): DispatchProps {
   return {
     increment: () => dispatch(ActionCreators.increment()),
   };
@@ -22,7 +22,7 @@ function mapDispatchToProps(dispatch: Dispatch<any>) {
 
 const ConnectedIncrement = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )<{}>(IncrementComponent);
 
 export default ConnectedIncrement;

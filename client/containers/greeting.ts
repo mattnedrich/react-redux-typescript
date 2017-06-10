@@ -23,7 +23,7 @@ function mapDispatchToProps(dispatch: Dispatch<any>): DispatchProps {
 
 const ConnectedGreeting = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )<{}>(GreetingComponent);
 
 export default ConnectedGreeting;

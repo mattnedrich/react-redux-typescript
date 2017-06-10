@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as Actions from '../action-creators/';
 
 export interface Props {
   greeting: string;

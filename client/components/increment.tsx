@@ -1,8 +1,4 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-
-import * as ActionCreators from '../action-creators/index';
-import { ApplicationState } from '../application-state';
 
 export interface Props {
   count: number;
@@ -28,4 +24,3 @@ export default class Increment extends React.Component<Props, any> {
     );
   }
 }
-
