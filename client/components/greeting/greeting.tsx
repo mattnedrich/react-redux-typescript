@@ -21,10 +21,10 @@ export default class Greeting extends React.Component<Props, {}> {
 
   public render() {
     return (
-      <div>
-        <h1> {this.props.greeting} </h1>
-        <input ref='greetingInputRef' type='text'></input>
-        <button onClick={this.updateGreetingAction}>Update Greeting</button>
+      <div id='greeting'>
+        <h1 id='greeting-text'>{this.props.greeting}</h1>
+        <input id='greeting-input' ref='greetingInputRef' type='text'></input>
+        <button id='greeting-button' onClick={this.updateGreetingAction}>Update Greeting</button>
       </div>
     );
   }
