@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import * as Actions from '../action-creators/index';
 import { ApplicationState } from '../application-state';
-import GreetingComponent from '../components/greeting/greeting';
+import GreetingComponent from '../components/greeting';
 
-import { Props as GreetingProps } from '../components/greeting/greeting';
+import { Props as GreetingProps } from '../components/greeting';
 
 type StateProps = Pick<GreetingProps, 'greeting'>;
 type DispatchProps = Pick<GreetingProps, 'updateGreeting'>;

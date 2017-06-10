@@ -2,11 +2,9 @@ import * as React from 'react';
 
 import { mount, render } from 'enzyme';
 
-import Greeting from '../greeting';
+import Greeting from '../index';
 
-function mockUpdateGreeting(greeting: string) {
-  return undefined;
-};
+function mockUpdateGreeting(greeting: string): void { };
 
 describe('The <Greeting /> Component', () => {
   it('renders and h1, input, and button tags', () => {
