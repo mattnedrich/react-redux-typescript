@@ -12,7 +12,25 @@ It also demonstrates how to set up [**Jest**](https://facebook.github.io/jest/) 
 - [Inspiration](#inspiration)
 - [File Structure](#file-structure)
 - [Setup](#setup)
-  - [Step 1. Create project](https://github.com/mattnedrich/react-redux-typescript/edit/master/README.md#step-1)
+  - [Step 1. Create project](#step-1)
+  - [Step 2. Install Dependencies](#step-2)
+    - [Webpack](#step-2-webpack)
+    - [React](#step-2-react)
+    - [Redux](#step-2-redux)
+    - [TypeScript](#step-2-typescript)
+    - [Jest](#step-2-jest)
+  - [Step 3. Project Configuration](#step-3)
+    - [Webpack](#step-3-webpack)
+    - [TypeScript](#step-3-typescript)
+    - [Jest](#step-3-jest)
+    - [TSLint](#step-3-tslint)
+  - [Step 4. HTML Boilerplate](#step-4)
+- [Example App](#example-app)
+  - [TypeScript with React/Redux](#example-app-typescript)
+    - [Components and Containers](#example-app-typescript-component-container)
+    - [Reducers](#example-app-typescript-reducers)
+  - [Project Scripts](#example-app-scripts)
+  - [Debugging](#example-app-debugging)
 
 # <a name="inspiration"></a>Inspiration
 Inspiration and instruction for this project was taken from the following blog posts and documention.
@@ -80,33 +98,33 @@ yarn init
 This will take ask your a series of questions, and will generate a `package.json` file based on how you answer them. You can always update the `package.json` file in the future, so don't feel like you have to configure everything correctly out of the box. 
 
 
-## [Step 2. Install Dependencies](#step-2)
+## <a name="step2"></a> Step 2. Install Dependencies
 This section describes how to install all of the required project dependencies using yarn. 
 
 For every yarn/npm library, there are usually types defined for it in the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) project. Those type can be added by installing `@types/[normal library name]`, where `[normal library name]` is the name of the library.
 
-### [Webpack](https://webpack.js.org/)
+### <a name="step2-webpack"></a> [Webpack](https://webpack.js.org/)
 We will use webpack to manage the compilation of our TypeScript code. Install webpack, and webpack-dev-server by running:
 
 ```
 yarn add webpack webpack-dev-server
 ```
 
-### [React](https://facebook.github.io/react/)
+### <a name="step2-react"></a> [React](https://facebook.github.io/react/)
 Install React with type definitions by running:
 
 ```
 yarn add react react-dom @types/react @types/react-dom
 ```
 
-### [React](https://facebook.github.io/react/)
+### <a name="step2-redux"></a> [Redux](https://facebook.github.io/react/)
 Install Redux for usage with react with type definitions by running:
 
 ```
 yarn add redux react-redux @types/redux @types/react-redux
 ```
 
-### [TypeScript](https://www.typescriptlang.org/)
+### <a name="step2-typescript"></a> [TypeScript](https://www.typescriptlang.org/)
 Install TypeScript by running:
 
 ```
@@ -115,7 +133,7 @@ yarn add typescript awesome-typescript-loader --dev
 
 This project uses `awesome-typescript-loader` for TypeScript compilation. The [TypeScript docs](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html) recommend using it. However, [`ts-loader`](https://github.com/TypeStrong/ts-loader) is also mentioned as an alternative. I have not used it, but it may be worth investigating.
 
-### [Jest](https://facebook.github.io/jest/docs/tutorial-react.html)
+### <a name="step2-jest"></a> [Jest](https://facebook.github.io/jest/docs/tutorial-react.html)
 This project uses Jest as its test runner. Install it and some supporting libraries by running:
 
 ```
@@ -148,10 +166,10 @@ After installing all of the above dependencies, you sould have a `node_modules` 
 
 The `dependencies` and `devDependencies` sections should be populated by the libraries we just installed.
 
-## [Step 3. Add Configuration Files](#step-3)
+## <a name="step3"></a> Step 3. Add Configuration Files
 The next step is to add configuration files for Webpack, TypeScript, and Jest.
 
-### Webpack Configuration
+### <a name="step3-webpack"></a> Webpack Configuration
 Create a `webpack.config.js` file, and update it to look something like this.
 
 ```javascript
@@ -178,7 +196,7 @@ module.exports = {
 
 The `webpack.config.js` file defines the entry point for our javascript code to live in `./client/index.tsx`, and specifies that the compiled javascript be placed in `./dist/bundle.js`. The `loaders` section describes how to process different file types. We are informing webpack to use the `awesome-typescript-loader` when processing `.ts` and `.tsx` files.
 
-### TypeScript Configuration
+### <a name="step3-typescript"></a> TypeScript Configuration
 Create a TypeScript configuration file called `tsconfig.json` with the following contents:
 
 ```json
@@ -205,7 +223,7 @@ Create a TypeScript configuration file called `tsconfig.json` with the following
 
 You can reference the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to understand the different `compilerOptions` and what they do. The above configuration should be enough to get off the ground.
 
-### Jest Configuration
+### <a name="step3-jest"></a> Jest Configuration
 Add the following to your `package.json` file, per the [`ts-jest` instructions](https://github.com/kulshekhar/ts-jest).
 
 ```json
@@ -222,7 +240,7 @@ Add the following to your `package.json` file, per the [`ts-jest` instructions](
 },
 ```
 
-### TSLint Configuration
+### <a name="step3-tslint"></a> TSLint Configuration
 Install [TSLint](https://palantir.github.io/tslint/) and run `tslint --init` to generate a base `tslint.json` file. I recommend using [tslint-eslint-rules](https://github.com/buzinas/tslint-eslint-rules) as a base rule set. I have written about TSLint [here](https://spin.atomicobject.com/2017/06/05/tslint-linting-setup/). The configuration used in this project looks like this:
 
 ```json
@@ -244,7 +262,7 @@ Install [TSLint](https://palantir.github.io/tslint/) and run `tslint --init` to 
 }
 ```
 
-## Step 4. Add HTML Boilerplate
+## <a name="step4"></a> Step 4. Add HTML Boilerplate
 We need to define the base HTML file that our application will live in. I recommend using something simple like the following:
 
 ```html
@@ -270,7 +288,7 @@ We can add the following script to our `package.json` file to allow us to start 
   "start": "webpack-dev-server --content-base ./"
 }
 ```
-# The Example App
+# <a name="example-app"></a> The Example App
 This example app, like every other React/Redux example app contains a greeting message the that user can change, and a button that increments a counter:
 
 <img src="https://cloud.githubusercontent.com/assets/4796480/23883359/d7c43d12-083c-11e7-8f51-82ce56624603.png" width="500px" />
@@ -305,10 +323,10 @@ class App extends React.Component<{}, {}> {
 }
 ```
 
-## TypeScript and React/Redux
+## <a name="example-app-typescript"></a> TypeScript and React/Redux
 The React type definitions specify two generic types for `React.Component<P, S>`. `P` is the type of the props for the component, and `S` is the type of the component state. If you are using Redux, you will most likely store all of your state in the redux store. If you do store any state local to a component, you can use `S` do define the shape of that state.
 
-### Component and Container Organization
+### <a name="example-app-typescript-component-container"></a> Component and Container Organization
 To describe the component and container organization I will refer to an example - the `Greeting` component and container.
 
 #### Container
@@ -366,7 +384,7 @@ export default ConnectedGreeting;
 
 The container can then be used elsewhere and will be connected to the Redux store to make and receive application state updates. Note the empty generic type `{}` between the connect call and the invocation to `GreetingComponent`. This is the external props type of the container. So, if you wish to define any props when using the container, you will need to define the shape of those props there.
 
-### Reducers with TypeScript
+### <a name="example-app-typescript-reducers"></a> Reducers with TypeScript
 One area in particular that types can be handy in React/Redux applications is inside of Redux reducers. [This article](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/) describes a really nice approach for writing strongly typed reducers.
 
 Using TypeScript we can define our actions in a type safe manner.
@@ -416,7 +434,7 @@ ERROR in [at-loader] client/reducers/index.ts:16:24
     TS2339: Property 'greeting' does not exist on type 'IncrementAction'.
 ```
 
-## Project Scripts
+## <a name="example-app-project-scripts"></a> Project Scripts
 To build the TypeScript code and produce an output `bundle.js` file run
 
 ```
@@ -441,7 +459,7 @@ To lint the project run
 yarn lint
 ```
 
-## Debugging
+## <a name="example-app-debugging"></a> Debugging
 The [Redux dev tools extension](https://github.com/zalmoxisus/redux-devtools-extension) is a nice way to visualize the redux state changes in your app, and debug issues that might arise. There are two steps required to install it:
 
 1. **Install the browser extension** - this varies based on your browser, but there are instructions in the above link.
