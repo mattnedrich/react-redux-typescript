@@ -84,8 +84,8 @@ where the above directories and files correspond to the following:
 - `package.json` - Project configuration file
 - `node_modules/` - Where dependencies are installed to
 
-# <a name="setup"></a>Setup
-## [Step 1. Create Project](#step-1)
+# <a name="setup"></a> Setup
+## <a name="step-1"></a> Step 1. Create Project
 You can choose to manage dependencies using either yarn or npm. As of early 2017 it's not clear if yarn will become the defacto standard, but it seems to be gaining popularity. These instructions will use `yarn`, but you can also use `npm` with minimal tweaks to the following instructions.
 
 You can find instructions for installing yarn [here](https://yarnpkg.com/lang/en/docs/install/)
@@ -98,33 +98,33 @@ yarn init
 This will take ask your a series of questions, and will generate a `package.json` file based on how you answer them. You can always update the `package.json` file in the future, so don't feel like you have to configure everything correctly out of the box. 
 
 
-## <a name="step2"></a> Step 2. Install Dependencies
+## <a name="step-2"></a> Step 2. Install Dependencies
 This section describes how to install all of the required project dependencies using yarn. 
 
 For every yarn/npm library, there are usually types defined for it in the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) project. Those type can be added by installing `@types/[normal library name]`, where `[normal library name]` is the name of the library.
 
-### <a name="step2-webpack"></a> [Webpack](https://webpack.js.org/)
+### <a name="step-2-webpack"></a> [Webpack](https://webpack.js.org/)
 We will use webpack to manage the compilation of our TypeScript code. Install webpack, and webpack-dev-server by running:
 
 ```
 yarn add webpack webpack-dev-server
 ```
 
-### <a name="step2-react"></a> [React](https://facebook.github.io/react/)
+### <a name="step-2-react"></a> [React](https://facebook.github.io/react/)
 Install React with type definitions by running:
 
 ```
 yarn add react react-dom @types/react @types/react-dom
 ```
 
-### <a name="step2-redux"></a> [Redux](https://facebook.github.io/react/)
+### <a name="step-2-redux"></a> [Redux](https://facebook.github.io/react/)
 Install Redux for usage with react with type definitions by running:
 
 ```
 yarn add redux react-redux @types/redux @types/react-redux
 ```
 
-### <a name="step2-typescript"></a> [TypeScript](https://www.typescriptlang.org/)
+### <a name="step-2-typescript"></a> [TypeScript](https://www.typescriptlang.org/)
 Install TypeScript by running:
 
 ```
@@ -133,7 +133,7 @@ yarn add typescript awesome-typescript-loader --dev
 
 This project uses `awesome-typescript-loader` for TypeScript compilation. The [TypeScript docs](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html) recommend using it. However, [`ts-loader`](https://github.com/TypeStrong/ts-loader) is also mentioned as an alternative. I have not used it, but it may be worth investigating.
 
-### <a name="step2-jest"></a> [Jest](https://facebook.github.io/jest/docs/tutorial-react.html)
+### <a name="step-2-jest"></a> [Jest](https://facebook.github.io/jest/docs/tutorial-react.html)
 This project uses Jest as its test runner. Install it and some supporting libraries by running:
 
 ```
@@ -166,10 +166,10 @@ After installing all of the above dependencies, you sould have a `node_modules` 
 
 The `dependencies` and `devDependencies` sections should be populated by the libraries we just installed.
 
-## <a name="step3"></a> Step 3. Add Configuration Files
+## <a name="step-3"></a> Step 3. Add Configuration Files
 The next step is to add configuration files for Webpack, TypeScript, and Jest.
 
-### <a name="step3-webpack"></a> Webpack Configuration
+### <a name="step-3-webpack"></a> Webpack Configuration
 Create a `webpack.config.js` file, and update it to look something like this.
 
 ```javascript
@@ -196,7 +196,7 @@ module.exports = {
 
 The `webpack.config.js` file defines the entry point for our javascript code to live in `./client/index.tsx`, and specifies that the compiled javascript be placed in `./dist/bundle.js`. The `loaders` section describes how to process different file types. We are informing webpack to use the `awesome-typescript-loader` when processing `.ts` and `.tsx` files.
 
-### <a name="step3-typescript"></a> TypeScript Configuration
+### <a name="step-3-typescript"></a> TypeScript Configuration
 Create a TypeScript configuration file called `tsconfig.json` with the following contents:
 
 ```json
@@ -223,7 +223,7 @@ Create a TypeScript configuration file called `tsconfig.json` with the following
 
 You can reference the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to understand the different `compilerOptions` and what they do. The above configuration should be enough to get off the ground.
 
-### <a name="step3-jest"></a> Jest Configuration
+### <a name="step-3-jest"></a> Jest Configuration
 Add the following to your `package.json` file, per the [`ts-jest` instructions](https://github.com/kulshekhar/ts-jest).
 
 ```json
@@ -240,7 +240,7 @@ Add the following to your `package.json` file, per the [`ts-jest` instructions](
 },
 ```
 
-### <a name="step3-tslint"></a> TSLint Configuration
+### <a name="step-3-tslint"></a> TSLint Configuration
 Install [TSLint](https://palantir.github.io/tslint/) and run `tslint --init` to generate a base `tslint.json` file. I recommend using [tslint-eslint-rules](https://github.com/buzinas/tslint-eslint-rules) as a base rule set. I have written about TSLint [here](https://spin.atomicobject.com/2017/06/05/tslint-linting-setup/). The configuration used in this project looks like this:
 
 ```json
@@ -262,7 +262,7 @@ Install [TSLint](https://palantir.github.io/tslint/) and run `tslint --init` to 
 }
 ```
 
-## <a name="step4"></a> Step 4. Add HTML Boilerplate
+## <a name="step-4"></a> Step 4. Add HTML Boilerplate
 We need to define the base HTML file that our application will live in. I recommend using something simple like the following:
 
 ```html
