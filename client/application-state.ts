@@ -3,9 +3,7 @@ export interface ApplicationState {
   greeting: string;
 };
 
-const defaultState: ApplicationState = {
+export const defaultState: ApplicationState = {
   count: 0,
   greeting: 'React-TypeScript-Redux Example',
 };
-
-export default defaultState;

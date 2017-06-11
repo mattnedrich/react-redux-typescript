@@ -1,4 +1,4 @@
-import defaultState from '../application-state';
+import { defaultState } from '../application-state';
 import { ApplicationState } from '../application-state';
 
 import { IncrementAction, UpdateGreetingAction } from '../action-creators/index';
