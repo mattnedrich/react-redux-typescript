@@ -403,6 +403,13 @@ To run the `jest` tests run
 ```
 yarn test
 ```
+
+To lint the project run
+
+```
+yarn lint
+```
+
 ## Debugging
 The [Redux dev tools extension](https://github.com/zalmoxisus/redux-devtools-extension) is a nice way to visualize the redux state changes in your app, and debug issues that might arise. There are two steps required to install it:
 
