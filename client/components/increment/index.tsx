@@ -17,7 +17,7 @@ export default class Increment extends React.Component<Props, any> {
 
   public render() {
     return (
-      <div>
+      <div id='increment'>
         <p id='increment-value'>{this.props.count}</p>
         <button onClick={this.buttonClicked}>Increment</button>
       </div>
