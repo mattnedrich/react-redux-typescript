@@ -20,7 +20,7 @@ It also demonstrates how to set up [**Jest**](https://facebook.github.io/jest/) 
   - [TypeScript with React/Redux](#example-app-typescript)
     - [Components and Containers](#example-app-typescript-component-container)
     - [Reducers](#example-app-typescript-reducers)
-  - [Project Scripts](#example-app-scripts)
+  - [Project Scripts](#example-app-project-scripts)
   - [Debugging](#example-app-debugging)
 
 # <a name="inspiration"></a>Inspiration
