@@ -1,11 +1,11 @@
 # Setup
-This project was created to demonstrate how to set up a project using the following technologies:
+This project was created to demonstrate how to set up and organize a project using:
 
-- **React**
-- **Redux**
-- **TypeScript**
+- [**React**](https://facebook.github.io/react/)
+- [**Redux**](http://redux.js.org/)
+- [**TypeScript**](https://www.typescriptlang.org/)
 
-It also demonstrates how to set up **Jest** for unit testing.
+It also demonstrates how to set up [**Jest**](https://facebook.github.io/jest/) for unit testing, and [**TSLint**](https://palantir.github.io/tslint/) for linting.
 
 ## Inspiration
 Inspiration and instruction for this project was taken from the following blog posts and documention.
@@ -24,12 +24,18 @@ This project uses the following file structure
 .
 |-- index.html
 |-- client/
-    |-- index.tsx
+    |-- action-creators
+    |-- action-types
     |-- components
+    |-- containers
+    |-- reducers
+    |-- application-state.ts
+    |-- index.tsx
 |-- dist/
     |-- bundle.js
 |-- webpack.config.js
 |-- tsconfig.json
+|-- tslint.json
 |-- package.json
 |-- node_modules/
 ```
@@ -38,12 +44,18 @@ where the above directories and files correspond to the following:
 
 - `index.html` - Html page served up to the client
 - `client/` - Source code
+- `client/action-creators/` - Redux actions and creators
+- `client/action-types/` - Redux actions types
+- `client/components/` - React components
+- `client/containers/` - Redux containers for components
+- `client/reducers/` - Redux reducers
+- `client/application-state.ts` - Redux application state
 - `client/index.tsx` - Entry point for the javascript code
-- `client/components/` - Custom react components
 - `dist/` - Output directory for transpiled code
 - `dist/bundle.js` - Transpiled application
 - `webpack.config.js` - Webpack configuration file
 - `tsconfig.json` - TypeScript configuration file
+- `tslint.json` - TSLint configuration
 - `package.json` - Project configuration file
 - `node_modules/` - Where dependencies are installed to
 
