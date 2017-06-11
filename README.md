@@ -18,17 +18,17 @@ Inspiration and instruction for this project was taken from the following blog p
 - [https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/)
 
 ## File Structure
-This project uses the following file structure
+This project uses the following organizational structure
 
 ```
 .
 |-- index.html
 |-- client/
-    |-- action-creators
-    |-- action-types
-    |-- components
-    |-- containers
-    |-- reducers
+    |-- action-creators/
+    |-- action-types/
+    |-- components/
+    |-- containers/
+    |-- reducers/
     |-- application-state.ts
     |-- index.tsx
 |-- dist/
@@ -73,7 +73,9 @@ This will take ask your a series of questions, and will generate a `package.json
 
 
 ## Step 2. Install Dependencies
-This sections describes how to install all of the required project dependencies using yarn.
+This section describes how to install all of the required project dependencies using yarn. 
+
+For every yarn/npm library, there are usually types defined for it in the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) project. Those type can be added by installing `@types/[normal library name]`, where `[normal library name]` is the name of the library.
 
 ### [Webpack](https://webpack.js.org/)
 We will use webpack to manage the compilation of our TypeScript code. Install webpack, and webpack-dev-server by running:
@@ -103,10 +105,10 @@ Install TypeScript by running:
 yarn add typescript awesome-typescript-loader --dev
 ```
 
-We specified `awesome-typescript-loader` which we will use as our TypeScript loader. The [TypeScript docs](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html) seem to recommend using `awesome-typescript-loader`, but also also mention [`ts-loader`](https://github.com/TypeStrong/ts-loader) as an alternative. I have not used it, but it may be worth investigating.
+This project uses `awesome-typescript-loader` for TypeScript compilation. The [TypeScript docs](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html) recommend using it. However, [`ts-loader`](https://github.com/TypeStrong/ts-loader) is also mentioned as an alternative. I have not used it, but it may be worth investigating.
 
 ### [Jest](https://facebook.github.io/jest/docs/tutorial-react.html)
-We will use Jest as our test runner. Install it and some supporting libraries by running:
+This project uses Jest as its test runner. Install it and some supporting libraries by running:
 
 ```
 yarn add jest ts-jest react-addons-test-utils --dev
@@ -136,7 +138,7 @@ After installing all of the above dependencies, you sould have a `node_modules` 
 
 ```
 
-The `dependencies` and `devDependencies` sections should be filled in by the libraries we just installed.
+The `dependencies` and `devDependencies` sections should be populated by the libraries we just installed.
 
 ## Step 3. Add Configuration Files
 The next step is to add configuration files for Webpack, TypeScript, and Jest.
@@ -179,7 +181,13 @@ Create a TypeScript configuration file called `tsconfig.json` with the following
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "es5",
-    "jsx": "react"
+    "jsx": "react",
+    "noUnusedLocals": true,
+    "lib": [
+      "es5",
+      "es6",
+      "dom"
+    ]
   },
   "include": [
     "./client/**/*"
@@ -187,7 +195,7 @@ Create a TypeScript configuration file called `tsconfig.json` with the following
 }
 ```
 
-You can reference the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to understand the different `compilerOptions` and what they do. The above configuration should be enough to get us off the ground.
+You can reference the [TypeScript docs](https://www.typescriptlang.org/docs/handbook/compiler-options.html) to understand the different `compilerOptions` and what they do. The above configuration should be enough to get off the ground.
 
 ### Jest Configuration
 Add the following to your `package.json` file, per the [`ts-jest` instructions](https://github.com/kulshekhar/ts-jest).
@@ -244,19 +252,17 @@ export interface ApplicationState {
   count: number;
 };
 
-const defaultState: ApplicationState = {
+export const defaultState: ApplicationState = {
   greeting: 'React-TypeScript-Redux Example',
   count: 0
 };
-
-export default defaultState;
 ```
 Notice how we can now define our state using types!
 
 There are two main components - `Greeting` and `Increment`. Both are included in a wrapper component called `App`:
 
 ```javascript
-class App extends React.Component<any, any> {
+class App extends React.Component<{}, {}> {
   render() {
     return (
       <div style={{textAlign: 'center'}}>
@@ -269,40 +275,70 @@ class App extends React.Component<any, any> {
 ```
 
 ## TypeScript and React/Redux
-Thus far, I'm enjoying working with TypeScript. It feels like working in Java or C#, but with Javascript. You can choose to incorporate TypeScript as much as you'd like. You can just write vanilla JavaScript, however, once you declare a type for a variable, it can cause type requirements to ripple into other parts of your code. This seems to be especially evident if you install the type bindings for React and Redux.
+The React type definitions specify two generic types for `React.Component<P, S>`. `P` is the type of the props for the component, and `S` is the type of the component state. If you are using Redux, you will most likely store all of your state in the redux store. If you do store any state local to a component, you can use `S` do define the shape of that state.
 
-The `Greeting` component runs into this on the React side of things. the `Greeting` component HTML looks like this:
+### Component and Container Organization
+To describe the component and container organization I will refer to an example - the `Greeting` component and container.
+
+#### Container
+The `Greeting` component is defined as:
 
 ```jsx
-  <div>
-    <h1> {this.props.greeting} </h1>
-    <input ref="greetingInputRef" type="text"></input>
-    <button onClick={this.updateGreetingAction}>Update Greeting</button>
-  </div>
+export interface Props {
+  greeting: string;
+  updateGreeting: (greeting: string) => void;
+};
+
+export default class Greeting extends React.Component<Props, {}> {
+...
+}
 ```
 
-When the button is clicked, it calls `updateGreetingAction` which needs to go fetch the text out out the `input` element and dispatch an action to update our application state. The `updateGreetingAction` function looks like this:
+Here, the `Greeting`component is completely unaware of the container that connects it to Redux. It simply renders itself using the defined `Props`. This makes it super testable.
+
+#### Container
+As with standard Redux, the `Greeting` container connects the `Greeting` component to the Redux store. It uses the exported component `Props` and splits the props into two sets - `State` props and `Dispatch` props:
 
 ```javascript
-  updateGreetingAction() {
-    this.props.updateGreeting(this.refs.greetingInputRef.value);
-  }
+import { Props as GreetingProps } from '../components/greeting';
+
+type StateProps = Pick<GreetingProps, 'greeting'>;
+type DispatchProps = Pick<GreetingProps, 'updateGreeting'>;
 ```
 
-Here, we just dispatch an action passing the `value` of the `input` element. When I first wrote this, the TypeScript compiler didn't know what `greetingInputRef` was, so it couldn't be sure that it had a `value` property. To work around this, I added some explicit type declaration via:
+Using those two sets of props, it defines the standard Redux `mapStateToProps`, and `mapDispatchToProps` functions.
 
 ```javascript
-  refs: {
-    greetingInputRef: HTMLInputElement;
-  }
+function mapStateToProps(state: ApplicationState): StateProps {
+  return { greeting: state.greeting };
+};
+
+function mapDispatchToProps(dispatch: Dispatch<any>): DispatchProps {
+  return {
+    updateGreeting: (newGreeting: string) => {
+      dispatch(Actions.updateGreeting(newGreeting));
+    },
+  };
+};
 ```
 
-You will run into these types of situations from time to time. It kind of makes you appreciate the weakly typed nature of JavaScript. It also makes you realize how fragile it is.
+These functions are provided to the Redux `connect` function and exported
+
+```javascript
+const ConnectedGreeting = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)<{}>(GreetingComponent);
+
+export default ConnectedGreeting;
+```
+
+The container can then be used elsewhere and will be connected to the Redux store to make and receive application state updates. Note the empty generic type `{}` between the connect call and the invocation to `GreetingComponent`. This is the external props type of the container. So, if you wish to define any props when using the container, you will need to define the shape of those props there.
 
 ### Reducers with TypeScript
-One area in particular that types can be handy in React/Redux applications is inside of Redux reducers. I came across [this article](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/) and wanted to try out a more strongly typed approach for writing reducers.
+One area in particular that types can be handy in React/Redux applications is inside of Redux reducers. [This article](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/) describes a really nice approach for writing strongly typed reducers.
 
-Using TypeScript we can define our actions in a type safe manner. The actions for the sample application are defined below, using  TypeScript `type` aliases:
+Using TypeScript we can define our actions in a type safe manner.
 
 ```typescript
 export type UpdateGreetingAction = {
