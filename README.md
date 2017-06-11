@@ -1,4 +1,4 @@
-# Setup
+# React-Redux-TypeScript
 This project was created to demonstrate how to set up and organize a project using:
 
 - [**React**](https://facebook.github.io/react/)
@@ -7,7 +7,7 @@ This project was created to demonstrate how to set up and organize a project usi
 
 It also demonstrates how to set up [**Jest**](https://facebook.github.io/jest/) for unit testing, and [**TSLint**](https://palantir.github.io/tslint/) for linting.
 
-## Inspiration
+# Inspiration
 Inspiration and instruction for this project was taken from the following blog posts and documention.
 
 - [https://scotch.io/tutorials/setup-a-react-environment-using-webpack-and-babel](https://scotch.io/tutorials/setup-a-react-environment-using-webpack-and-babel)
@@ -17,7 +17,7 @@ Inspiration and instruction for this project was taken from the following blog p
 - [https://github.com/facebook/jest/tree/master/examples/typescript](https://github.com/facebook/jest/tree/master/examples/typescript)
 - [https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/)
 
-## File Structure
+# File Structure
 This project uses the following organizational structure
 
 ```
@@ -59,7 +59,8 @@ where the above directories and files correspond to the following:
 - `package.json` - Project configuration file
 - `node_modules/` - Where dependencies are installed to
 
-## Step 1 - Set up [yarn](https://yarnpkg.com/en/) (or [npm](https://www.npmjs.com/))
+# [Setup](#setup)
+## [Step 1. Create Project](#step-1)
 You can choose to manage dependencies using either yarn or npm. As of early 2017 it's not clear if yarn will become the defacto standard, but it seems to be gaining popularity. These instructions will use `yarn`, but you can also use `npm` with minimal tweaks to the following instructions.
 
 You can find instructions for installing yarn [here](https://yarnpkg.com/lang/en/docs/install/)
@@ -72,7 +73,7 @@ yarn init
 This will take ask your a series of questions, and will generate a `package.json` file based on how you answer them. You can always update the `package.json` file in the future, so don't feel like you have to configure everything correctly out of the box. 
 
 
-## Step 2. Install Dependencies
+## [Step 2. Install Dependencies](#step-2)
 This section describes how to install all of the required project dependencies using yarn. 
 
 For every yarn/npm library, there are usually types defined for it in the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) project. Those type can be added by installing `@types/[normal library name]`, where `[normal library name]` is the name of the library.
@@ -140,7 +141,7 @@ After installing all of the above dependencies, you sould have a `node_modules` 
 
 The `dependencies` and `devDependencies` sections should be populated by the libraries we just installed.
 
-## Step 3. Add Configuration Files
+## [Step 3. Add Configuration Files](#step-3)
 The next step is to add configuration files for Webpack, TypeScript, and Jest.
 
 ### Webpack Configuration
@@ -236,7 +237,7 @@ Install [TSLint](https://palantir.github.io/tslint/) and run `tslint --init` to 
 }
 ```
 
-## Step 4. Add Some HTML Boilerplate
+## Step 4. Add HTML Boilerplate
 We need to define the base HTML file that our application will live in. I recommend using something simple like the following:
 
 ```html
