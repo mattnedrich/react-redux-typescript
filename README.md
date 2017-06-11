@@ -213,6 +213,29 @@ Add the following to your `package.json` file, per the [`ts-jest` instructions](
   ]
 },
 ```
+
+### TSLint Configuration
+Install [TSLint](https://palantir.github.io/tslint/) and run `tslint --init` to generate a base `tslint.json` file. I recommend using [tslint-eslint-rules](https://github.com/buzinas/tslint-eslint-rules) as a base rule set. I have written about TSLint [here](https://spin.atomicobject.com/2017/06/05/tslint-linting-setup/). The configuration used in this project looks like this:
+
+```json
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-eslint-rules"
+  ],
+  "jsRules": {},
+  "rules": {
+    "quotemark": [true, "single"],
+    "ter-indent": [true, 2],
+    "interface-name": [true, "never-prefix"],
+    "no-empty": false,
+    "import-sources-order": "any",
+    "ordered-imports": false
+  },
+  "rulesDirectory": []
+}
+```
+
 ## Step 4. Add Some HTML Boilerplate
 We need to define the base HTML file that our application will live in. I recommend using something simple like the following:
 
