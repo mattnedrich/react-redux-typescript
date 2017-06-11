@@ -7,7 +7,14 @@ This project was created to demonstrate how to set up and organize a project usi
 
 It also demonstrates how to set up [**Jest**](https://facebook.github.io/jest/) for unit testing, and [**TSLint**](https://palantir.github.io/tslint/) for linting.
 
-# Inspiration
+
+# Table of Contents
+- [Inspiration](#inspiration)
+- [File Structure](#file-structure)
+- [Setup](#setup)
+  - [Step 1. Create project](https://github.com/mattnedrich/react-redux-typescript/edit/master/README.md#step-1)
+
+# <a name="inspiration"></a>Inspiration
 Inspiration and instruction for this project was taken from the following blog posts and documention.
 
 - [https://scotch.io/tutorials/setup-a-react-environment-using-webpack-and-babel](https://scotch.io/tutorials/setup-a-react-environment-using-webpack-and-babel)
@@ -17,7 +24,7 @@ Inspiration and instruction for this project was taken from the following blog p
 - [https://github.com/facebook/jest/tree/master/examples/typescript](https://github.com/facebook/jest/tree/master/examples/typescript)
 - [https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/](https://spin.atomicobject.com/2016/09/27/typed-redux-reducers-typescript-2-0/)
 
-# File Structure
+# <a name="file-structure"></a>File Structure
 This project uses the following organizational structure
 
 ```
@@ -59,7 +66,7 @@ where the above directories and files correspond to the following:
 - `package.json` - Project configuration file
 - `node_modules/` - Where dependencies are installed to
 
-# [Setup](#setup)
+# <a name="setup"></a>Setup
 ## [Step 1. Create Project](#step-1)
 You can choose to manage dependencies using either yarn or npm. As of early 2017 it's not clear if yarn will become the defacto standard, but it seems to be gaining popularity. These instructions will use `yarn`, but you can also use `npm` with minimal tweaks to the following instructions.
 
