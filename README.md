@@ -44,15 +44,15 @@ where the above directories and files correspond to the following:
 
 - `index.html` - Html page served up to the client
 - `client/` - Source code
-- `client/action-creators/` - Redux actions and creators
-- `client/action-types/` - Redux actions types
-- `client/components/` - React components
-- `client/containers/` - Redux containers for components
-- `client/reducers/` - Redux reducers
-- `client/application-state.ts` - Redux application state
-- `client/index.tsx` - Entry point for the javascript code
+  - `client/action-creators/` - Redux actions and creators
+  - `client/action-types/` - Redux actions types
+  - `client/components/` - React components
+  - `client/containers/` - Redux containers for components
+  - `client/reducers/` - Redux reducers
+  - `client/application-state.ts` - Redux application state
+  - `client/index.tsx` - Entry point for the javascript code
 - `dist/` - Output directory for transpiled code
-- `dist/bundle.js` - Transpiled application
+  - `dist/bundle.js` - Transpiled application
 - `webpack.config.js` - Webpack configuration file
 - `tsconfig.json` - TypeScript configuration file
 - `tslint.json` - TSLint configuration
